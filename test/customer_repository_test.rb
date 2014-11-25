@@ -10,14 +10,12 @@ class CustomerRepositoryTest < Minitest::Test
     @customer_repository = CustomerRepository.load_file("../data/customers_testdata.csv")
   end
 
-  def test_load_test_datafile 
-
-    #customer_repository = CustomerRepository.load_file("./data/customers_testdata.csv")
+  def test_load_test_datafile
     assert_equal 18, customer_repository.find_all.length
   end
 
   def test_the_3rd_record_has_first_name_mariah
-  
+
     assert_equal "Mariah", customer_repository.find_all[2].first_name
   end
 

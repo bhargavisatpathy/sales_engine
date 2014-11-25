@@ -37,6 +37,4 @@ class InvoiceItemRepository < Repository
   def find_all_by_unit_price(unit_price)
     find_by_X(:unit_price, unit_price)
   end
-
-
 end
