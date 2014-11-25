@@ -17,4 +17,14 @@ class Repository
   def find_all
     entities
   end
+
+  protected
+
+  def find_by_X(attribute, criteria)
+    find_all_by_X(attribute, criteria).first
+  end
+
+  def find_all_by_X(attribute, criteria)
+    find_all.select { |entity| entity.send(attribute).downcase == critera.downcase }
+  end
 end
