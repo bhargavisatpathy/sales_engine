@@ -18,6 +18,8 @@ class Repository
     entities
   end
 
+  def find_
+
   protected
 
   def find_by_X(attribute, criteria)
@@ -25,10 +27,10 @@ class Repository
   end
 
   def find_all_by_X(attribute, criteria)
-    find_all.select { |entity| entity.send(attribute).downcase == critera.downcase }
+    find_all.select { |entity| entity.send(attribute).downcase == criteria.downcase }
   end
 
-  def find_by_id(id)
+  def find_by_id(id, repository_class_instance)
     find_by_X(:id, id)
   end
 

@@ -7,7 +7,7 @@ require_relative '../lib/customer_repository'
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository
   def setup
-    @customer_repository = CustomerRepository.load_file("../data/customers_testdata.csv")
+    @customer_repository = CustomerRepository.load_file("./data/customers_testdata.csv")
   end
 
   def test_load_test_datafile
@@ -24,6 +24,6 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_last_name_will_returns_3_named_rodriguez
-    assert_equal 3, customer_repository.find_all_by(last_name,"Rodriguez")
+    assert_equal 3, customer_repository.find_all_by_last_name("Rodriguez").count
   end
 end

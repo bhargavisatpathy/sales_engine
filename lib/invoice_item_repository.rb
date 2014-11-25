@@ -27,14 +27,14 @@ class InvoiceItemRepository < Repository
   end
 
   def find_all_by_invoice_id(invoice_id)
-    find_by_X(:invoice_id, invoice_id)
+    find_all_by_X(:invoice_id, invoice_id)
   end
 
   def find_all_by_quantity(quantity)
-    find_by_X(:quantity, quantity)
+    find_all_by_X(:quantity, quantity)
   end
 
   def find_all_by_unit_price(unit_price)
-    find_by_X(:unit_price, unit_price)
+    find_all_by_X(:unit_price, unit_price)
   end
 end
