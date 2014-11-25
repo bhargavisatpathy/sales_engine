@@ -1,13 +1,8 @@
-class MerchantRepository
-  def initialize(data)
-    @data = data
-  end
+require_relative 'repository'
+require_relative 'merchant'
 
-  def loadfile
-    data      = CSV.open("./data/merchants_testdata.csv", headers: true, header_converters: :symbol)
-    merchants = data.map do |row|
-      Merchant.new(row)
-    end
-    new(merchants)
+class MerchantRepository < Repository
+  def self.load_file(filename)
+    new Repository.load_file(filename, Merchant)
   end
 end
