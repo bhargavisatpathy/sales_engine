@@ -15,13 +15,16 @@ require_relative 'transaction_repository'
 
 class SalesEngine
 
-  def initialize
-    @merchant_repository      = Merchant.new
-    @invoice_repository       = Invoice.new
-    @item_repository          = Item.new
-    @invoice_item_repository  = InvoiceItem.new
-    @customer_repository      = Customer.new
-    @transaction_repository   = Transaction.new
+  attr_reader :merchant_repository, :invoice_repository, :item_repository,
+              :invoice_item_repository, :customer_repository, :transaction_repository
+
+  def startup
+    @merchant_repository      = MerchantRepository.load_file("./data/merchants.csv")
+    @invoice_repository       = InvoiceRepository.load_file("./data/inovoices.csv")
+    @item_repository          = ItemRepository.load_file("./data/items.csv")
+    @invoice_item_repository  = InvoiceItemRepository.load_file("./data/invoice_items.csv")
+    @customer_repository      = CustomerRepository.load_file("./data/cutomers.csv")
+    @transaction_repository   = TransactionRepository.load_file("./data/transactions.csv")
   end
 
 

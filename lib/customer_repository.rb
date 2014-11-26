@@ -1,9 +1,13 @@
+require 'csv'
 require_relative 'repository'
 require_relative 'customer'
 
 class CustomerRepository < Repository
-  def self.load_file(filename)
-    new Repository.load_file(filename, Customer)
+  def load_file(filename)
+    rows     = CSV.open(filename, headers: true, header_converters: :symbol)
+    @entities = rows.map do |row|
+      Customer.new(row)
+    end
   end
 
   def find_by_first_name(first_name)

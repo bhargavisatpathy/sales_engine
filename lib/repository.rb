@@ -2,23 +2,19 @@ require 'csv'
 
 class Repository
   attr_reader :entities
-  def initialize(entities)
-    @entities = entities
-  end
 
-  def self.load_file(filename, entity_type)
-    rows     = CSV.open(filename, headers: true, header_converters: :symbol)
-    entities = rows.map do |row|
-      entity_type.new(row)
-    end
-    entities
+  def initialize
+    @entities = []
   end
 
   def find_all
     entities
   end
 
-  def find_
+  def find_random
+    record_number = rand(0..entities.length - 1)
+    entities[record_number]
+  end
 
   protected
 
@@ -30,7 +26,7 @@ class Repository
     find_all.select { |entity| entity.send(attribute).downcase == criteria.downcase }
   end
 
-  def find_by_id(id, repository_class_instance)
+  def find_by_id(id)
     find_by_X(:id, id)
   end
 

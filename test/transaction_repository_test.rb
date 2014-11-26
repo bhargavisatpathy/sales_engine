@@ -7,7 +7,8 @@ require_relative '../lib/transaction_repository'
 class TransactionRepositoryTest < Minitest::Test
   attr_reader :transaction_repository
   def setup
-    @transaction_repository = TransactionRepository.load_file("./data/transactions_testdata.csv")
+    @transaction_repository = TransactionRepository.new
+    transaction_repository.load_file("./data/transactions_testdata.csv")
   end
   def test_load_test_datafile
     assert_equal 24, transaction_repository.find_all.length

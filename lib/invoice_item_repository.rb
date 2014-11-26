@@ -1,9 +1,13 @@
+require 'csv'
 require_relative 'repository'
 require_relative 'invoice_item'
 
 class InvoiceItemRepository < Repository
-  def self.load_file(filename)
-    new Repository.load_file(filename, InvoiceItem)
+  def load_file(filename)
+    rows     = CSV.open(filename, headers: true, header_converters: :symbol)
+    @entities = rows.map do |row|
+      InvoiceItem.new(row)
+    end
   end
 
   def find_by_item_id(item_id)
