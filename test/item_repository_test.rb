@@ -7,7 +7,7 @@ require_relative '../lib/item_repository'
 class ItemRepositoryTest < Minitest::Test
   attr_reader :item_repository
   def setup
-    @item_repository = ItemRepository.load_file("../data/items_testdata.csv")
+    @item_repository = ItemRepository.load_file("./data/items_testdata.csv")
   end
 
   def test_load_test_datafile
