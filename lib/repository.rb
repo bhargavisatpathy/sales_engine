@@ -2,6 +2,7 @@ require 'csv'
 
 class Repository
   attr_reader :entities
+
   def initialize(entities)
     @entities = entities
   end
@@ -18,7 +19,7 @@ class Repository
     entities
   end
 
-  def find_
+  # def find_
 
   protected
 

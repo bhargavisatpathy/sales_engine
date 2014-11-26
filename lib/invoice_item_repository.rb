@@ -22,6 +22,7 @@ class InvoiceItemRepository < Repository
     find_by_X(:unit_price, unit_price)
   end
 
+#find all by tests
   def find_all_by_item_id(item_id)
     find_all_by_X(:item_id, item_id)
   end
