@@ -37,6 +37,7 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 1, transaction_repository.find_all_by_credit_card_number("4654405418249632").count
   end
 
+  #downcase issue with nil class
   #  def test_find_all_by_credit_card_expiration_date
   #   assert_equal 0, transaction_repository.find_all_by_credit_card_expiration_date("").count
   # end
