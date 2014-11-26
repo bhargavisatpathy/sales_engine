@@ -1,0 +1,23 @@
+gem 'minitest', '~> 5.2'
+require 'minitest/autorun'
+require 'minitest/pride'
+
+require_relative '../lib/merchant'
+
+
+class MerchantTest < Minitest::Test
+  def merchant
+    data = {
+      id: '1', name: 'Schroeder-Jerde',
+      created_at: '2012-03-27 14:54:00 UTC',
+      updated_at: '2012-03-27 14:54:00 UTC'
+    }
+
+    merchant = Merchant.new(data)
+
+    assert_equal '1', merchant.id
+    assert_equal 'Schroeder-Jerde', merchant.name
+    assert_equal '2012-03-27 14:54:00 UTC', merchant.created_at
+    assert_equal '2012-03-27 14:54:00 UTC', merchant.updated_at
+  end
+end
