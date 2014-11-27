@@ -26,6 +26,8 @@ class TransactionRepository < Repository
     find_by_X(:result, result)
   end
 
+
+#find by all
   def find_all_by_invoice_id(invoice_id)
     find_all_by_X(:invoice_id, invoice_id)
   end

@@ -23,6 +23,10 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal "1", invoice_item_repository.find_all[2].invoice_id
   end
 
+  def test_find_by_item_id
+    assert_equal "535", invoice_item_repository.find_all[3].item_id
+  end
+
   def test_find_by_quantity_has_quantity_5
     assert_equal "8", invoice_item_repository.find_all[2].quantity
   end
@@ -31,8 +35,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal "34873", invoice_item_repository.find_all[2].unit_price
   end
 
-  def test_find_by_item_id
-    assert_equal "535", invoice_item_repository.find_all[3].item_id
+  def test_find_all_by_item_id
+    assert_equal 2, invoice_item_repository.find_all_by_item_id("1921").count
   end
 
   def test_find_all_by_invoice_id

@@ -14,7 +14,11 @@ class ItemRepository < Repository
     find_by_X(:name, name)
   end
 
-  def find_by_description(unit_price)
+  def find_by_description(description)
+    find_by_X(:description, description)
+  end
+
+  def find_by_unit_price(unit_price)
     find_by_X(:unit_price, unit_price)
   end
 
@@ -22,11 +26,22 @@ class ItemRepository < Repository
     find_by_X(:merchant_id, merchant_id)
   end
 
+
+#find by all
+
   def find_all_by_name(name)
     find_all_by_X(:name, name)
   end
 
+<<<<<<< HEAD
   def find_all_by_description(unit_price)
+=======
+  def find_all_by_description(description)
+    find_all_by_X(:description, description)
+  end
+
+  def find_all_by_unit_price(unit_price)
+>>>>>>> 74ce6b049518d3e342e28b2411c909ef54d8d576
     find_all_by_X(:unit_price, unit_price)
   end
 

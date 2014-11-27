@@ -16,7 +16,6 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_the_3rd_record_has_first_name_mariah
-
     assert_equal "Mariah", customer_repository.find_all[2].first_name
   end
 
@@ -24,7 +23,7 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal "Reynolds", customer_repository.find_all[9].last_name
   end
 
-  def test_find_all_by_last_name_will_returns_3_named_rodriguez
+  def test_find_all_by_last_name_will_return_3_named_rodriguez
     assert_equal 3, customer_repository.find_all_by_last_name("Rodriguez").count
   end
 end
