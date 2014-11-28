@@ -2,12 +2,14 @@ gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 
+require_relative '../lib/sales_engine'
 require_relative '../lib/customer_repository'
 
 class CustomerRepositoryTest < Minitest::Test
-  attr_reader :customer_repository
+  attr_reader :customer_repository, :sales_engine
   def setup
-    @customer_repository = CustomerRepository.new
+    @sales_engine = SalesEngine.new
+    @customer_repository = CustomerRepository.new(sales_engine)
     customer_repository.load_file("./data/customers_testdata.csv")
   end
 

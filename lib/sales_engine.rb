@@ -31,7 +31,7 @@ class SalesEngine
     invoice_repository.load_file("./data/invoices.csv")
     item_repository.load_file("./data/items.csv")
     invoice_item_repository.load_file("./data/invoice_items.csv")
-    customer_repository.load_file("./data/cutomers.csv")
+    customer_repository.load_file("./data/customers.csv")
     transaction_repository.load_file("./data/transactions.csv")
   end
   def find_invoices_by_customer_id(id)

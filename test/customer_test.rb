@@ -6,6 +6,7 @@ require_relative '../lib/customer'
 
 
 class CustomerTest < Minitest::Test
+  attr_reader :parent
   def test_customer_test_attributes
     data = {
       id: '1', first_name: 'Joey',last_name: 'Ondricka',
@@ -13,7 +14,8 @@ class CustomerTest < Minitest::Test
       updated_at: '2012-03-27 14:54:09 UTC'
     }
 
-    customer = Customer.new(data)
+    @parent = Minitest::Mock.new
+    customer = Customer.new(data, parent)
 
     assert_equal '1', customer.id
     assert_equal 'Joey', customer.first_name

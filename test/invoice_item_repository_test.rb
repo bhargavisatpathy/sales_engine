@@ -2,12 +2,14 @@ gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 
+require_relative '../lib/sales_engine'
 require_relative '../lib/invoice_item_repository'
 
 class InvoiceItemRepositoryTest < Minitest::Test
-  attr_reader :invoice_item_repository
+  attr_reader :invoice_item_repository, :sales_engine
   def setup
-    @invoice_item_repository = InvoiceItemRepository.new
+    @sales_engine = SalesEngine.new
+    @invoice_item_repository = InvoiceItemRepository.new(sales_engine)
     invoice_item_repository.load_file("./data/invoice_items_testdata.csv")
   end
 
