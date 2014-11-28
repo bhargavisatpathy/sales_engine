@@ -3,12 +3,14 @@ require 'minitest/autorun'
 require 'minitest/pride'
 
 require_relative '../lib/invoice_repository'
+require_relative '../lib/sales_engine'
 
 class InvoiceRepositoryTest < Minitest::Test
-  attr_reader :invoice_repository
+  attr_reader :invoice_repository, :sales_engine
   def setup
-    @invoice_repository = InvoiceRepository.new
-    invoice_repository.load_file("./data/invoices_testdata.csv")
+    @sales_engine = SalesEngine.new
+    @invoice_repository = InvoiceRepository.new(sales_engine)
+    invoice_repository.load_file("./fixtures/invoices_testdata.csv")
   end
 
   def test_load_test_datafile

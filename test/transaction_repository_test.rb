@@ -2,13 +2,16 @@ gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 
+require_relative '../lib/sales_engine'
 require_relative '../lib/transaction_repository'
 
+
 class TransactionRepositoryTest < Minitest::Test
-  attr_reader :transaction_repository
+  attr_reader :transaction_repository, :sales_engine
   def setup
-    @transaction_repository = TransactionRepository.new
-    transaction_repository.load_file("./data/transactions_testdata.csv")
+    @sales_engine = SalesEngine.new
+    @transaction_repository = TransactionRepository.new(sales_engine)
+    transaction_repository.load_file("./fixtures/transactions_testdata.csv")
   end
   def test_load_test_datafile
     assert_equal 24, transaction_repository.find_all.length

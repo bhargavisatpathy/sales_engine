@@ -6,6 +6,7 @@ require_relative '../lib/item'
 
 
 class ItemTest < Minitest::Test
+  attr_reader :parent
   def test_item_test_attributes
     data = {
       id: '1', name: 'Item Qui Esse',description: 'Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.',
@@ -14,7 +15,8 @@ class ItemTest < Minitest::Test
       updated_at: '2012-03-27 14:53:59 UTC'
     }
 
-    item = Item.new(data)
+    @parent = Minitest::Mock.new
+    item = Item.new(data, parent)
 
     assert_equal '1', item.id
     assert_equal 'Item Qui Esse', item.name
