@@ -6,7 +6,7 @@ class CustomerRepository < Repository
   def load_file(filename)
     rows     = CSV.open(filename, headers: true, header_converters: :symbol)
     @entities = rows.map do |row|
-      Customer.new(row)
+      Customer.new(row, self)
     end
   end
 
@@ -24,6 +24,10 @@ class CustomerRepository < Repository
 
   def find_all_by_last_name(last_name)
     find_all_by_X(:last_name, last_name)
+  end
+
+  def find_invoices(id)
+    sales_engine.find_invoices_by_customer(id)
   end
 
 end

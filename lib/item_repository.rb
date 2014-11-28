@@ -6,7 +6,7 @@ class ItemRepository < Repository
   def load_file(filename)
     rows     = CSV.open(filename, headers: true, header_converters: :symbol)
     @entities = rows.map do |row|
-      Item.new(row)
+      Item.new(row, self)
     end
   end
 

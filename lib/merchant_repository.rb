@@ -6,7 +6,7 @@ class MerchantRepository < Repository
   def load_file(filename)
     rows     = CSV.open(filename, headers: true, header_converters: :symbol)
     @entities = rows.map do |row|
-      Merchant.new(row)
+      Merchant.new(row, self)
     end
   end
 
