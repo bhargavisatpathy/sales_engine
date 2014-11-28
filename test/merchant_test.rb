@@ -6,6 +6,7 @@ require_relative '../lib/merchant'
 
 
 class MerchantTest < Minitest::Test
+  attr_reader :parent
   def merchant
     data = {
       id: '1', name: 'Schroeder-Jerde',
@@ -13,7 +14,8 @@ class MerchantTest < Minitest::Test
       updated_at: '2012-03-27 14:54:00 UTC'
     }
 
-    merchant = Merchant.new(data)
+    @parent = Minitest::Mock.new
+    merchant = Merchant.new(data, parent)
 
     assert_equal '1', merchant.id
     assert_equal 'Schroeder-Jerde', merchant.name
