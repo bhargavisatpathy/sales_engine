@@ -10,7 +10,7 @@ class CustomerRepositoryTest < Minitest::Test
   def setup
     @sales_engine = SalesEngine.new
     @customer_repository = CustomerRepository.new(sales_engine)
-    customer_repository.load_file("./data/customers_testdata.csv")
+    customer_repository.load_file("./fixtures/customers_testdata.csv")
   end
 
   def test_load_test_datafile

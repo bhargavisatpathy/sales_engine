@@ -6,6 +6,7 @@ require_relative '../lib/invoice_item'
 
 
 class InvoiceItemTest < Minitest::Test
+  attr_reader :parent
   def test_Invoice_Item_attributes
     data = {
       id: '1', item_id: '539',invoice_id: '1',
@@ -14,7 +15,8 @@ class InvoiceItemTest < Minitest::Test
       updated_at: '2012-03-27 14:54:09 UTC'
     }
 
-    invoice_item = InvoiceItem.new(data)
+    @parent = Minitest::Mock.new
+    invoice_item = InvoiceItem.new(data, parent)
 
     assert_equal '1', invoice_item.id
     assert_equal '539', invoice_item.item_id

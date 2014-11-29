@@ -10,7 +10,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def setup
     @sales_engine = SalesEngine.new
     @invoice_item_repository = InvoiceItemRepository.new(sales_engine)
-    invoice_item_repository.load_file("./data/invoice_items_testdata.csv")
+    invoice_item_repository.load_file("./fixtures/invoice_items_testdata.csv")
   end
 
   def test_load_test_datafile

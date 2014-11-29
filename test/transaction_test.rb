@@ -6,6 +6,7 @@ require_relative '../lib/transaction'
 
 
 class TransactionTest < Minitest::Test
+  attr_reader :parent
   def test_transaction_test_attributes
     data = {
       id: '1', invoice_id: '1',credit_card_number: '4654405418249632',
@@ -15,7 +16,8 @@ class TransactionTest < Minitest::Test
       updated_at: '2012-03-27 14:54:09 UTC'
     }
 
-    transaction = Transaction.new(data)
+    @parent = Minitest::Mock.new
+    transaction = Transaction.new(data,parent)
 
     assert_equal '1', transaction.id
     assert_equal '1', transaction.invoice_id
