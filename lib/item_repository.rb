@@ -26,9 +26,6 @@ class ItemRepository < Repository
     find_by_X(:merchant_id, merchant_id)
   end
 
-
-#find by all
-
   def find_all_by_name(name)
     find_all_by_X(:name, name)
   end
@@ -43,5 +40,9 @@ class ItemRepository < Repository
 
   def find_all_by_merchant_id(merchant_id)
     find_all_by_X(:merchant_id, merchant_id)
+  end
+
+  def find_invoice_items(id)
+    sales_engine.find_invoice_items_with(id)
   end
 end

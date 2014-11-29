@@ -37,7 +37,12 @@ class SalesEngine
   def find_invoices_by_customer_id(id)
     invoice_repository.find_all_by_customer_id(id)
   end
-
+  def find_invoice_with(invoice_id)
+    invoice_repository.find_by_id(invoice_id)
+  end
+  def find_invoice_items_with(id)
+    invoice_item_repository.find_all_by_item_id(id)
+  end
 end
 
 engine = SalesEngine.new
