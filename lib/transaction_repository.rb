@@ -3,7 +3,7 @@ require_relative 'repository'
 require_relative 'transaction'
 
 class TransactionRepository < Repository
-  def load_file(filename)
+  def load_file
     rows     = CSV.open(filename, headers: true, header_converters: :symbol)
     @entities = rows.map do |row|
       Transaction.new(row, self)

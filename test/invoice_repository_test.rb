@@ -9,8 +9,8 @@ class InvoiceRepositoryTest < Minitest::Test
   attr_reader :invoice_repository, :sales_engine
   def setup
     @sales_engine = SalesEngine.new
-    @invoice_repository = InvoiceRepository.new(sales_engine)
-    invoice_repository.load_file("./fixtures/invoices_testdata.csv")
+    @invoice_repository = InvoiceRepository.new(sales_engine, "./fixtures/invoices_testdata.csv")
+    invoice_repository.load_file
   end
 
   def test_load_test_datafile

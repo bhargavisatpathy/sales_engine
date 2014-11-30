@@ -19,20 +19,20 @@ class SalesEngine
               :invoice_item_repository, :customer_repository, :transaction_repository
 
   def initialize
-    @merchant_repository      = MerchantRepository.new(self) #here self is sales_engine
-    @invoice_repository       = InvoiceRepository.new(self)
-    @item_repository          = ItemRepository.new(self)
-    @invoice_item_repository  = InvoiceItemRepository.new(self)
-    @customer_repository      = CustomerRepository.new(self)
-    @transaction_repository   = TransactionRepository.new(self)
+    @merchant_repository      = MerchantRepository.new(self, "./data/merchants.csv") 
+    @invoice_repository       = InvoiceRepository.new(self, "./data/invoices.csv")
+    @item_repository          = ItemRepository.new(self, "./data/items.csv")
+    @invoice_item_repository  = InvoiceItemRepository.new(self, "./data/invoice_items.csv")
+    @customer_repository      = CustomerRepository.new(self, "./data/customers.csv")
+    @transaction_repository   = TransactionRepository.new(self, "./data/transactions.csv")
   end
   def startup
-    merchant_repository.load_file("./data/merchants.csv")
-    invoice_repository.load_file("./data/invoices.csv")
-    item_repository.load_file("./data/items.csv")
-    invoice_item_repository.load_file("./data/invoice_items.csv")
-    customer_repository.load_file("./data/customers.csv")
-    transaction_repository.load_file("./data/transactions.csv")
+    merchant_repository.load_file
+    invoice_repository.load_file
+    item_repository.load_file
+    invoice_item_repository.load_file
+    customer_repository.load_file
+    transaction_repository.load_file
   end
   def find_invoices_by_customer(id)
     invoice_repository.find_all_by_customer_id(id)

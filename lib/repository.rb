@@ -1,11 +1,12 @@
 require 'csv'
 
 class Repository
-  attr_reader :entities, :sales_engine
+  attr_reader :entities, :sales_engine, :filename
 
-  def initialize(sales_engine)
+  def initialize(sales_engine, filename)
     @sales_engine = sales_engine
     @entities = []
+    @filename = filename
   end
 
   def find_all

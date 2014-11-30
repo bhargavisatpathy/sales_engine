@@ -9,8 +9,8 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository, :sales_engine
   def setup
     @sales_engine = SalesEngine.new
-    @customer_repository = CustomerRepository.new(sales_engine)
-    customer_repository.load_file("./fixtures/customers_testdata.csv")
+    @customer_repository = CustomerRepository.new(sales_engine, "./fixtures/customers_testdata.csv")
+    customer_repository.load_file
   end
 
   def test_load_test_datafile
@@ -31,7 +31,7 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_it_delegates_find_invoices_to_sales_engine
     parent = Minitest::Mock.new
-    customer_repository = CustomerRepository.new(parent)
+    customer_repository = CustomerRepository.new(parent, nil)
     parent.expect(:find_invoices_by_customer, nil, ["1"])
     customer_repository.find_invoices("1")
     parent.verify

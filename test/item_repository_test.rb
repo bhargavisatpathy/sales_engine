@@ -9,8 +9,8 @@ class ItemRepositoryTest < Minitest::Test
   attr_reader :item_repository, :sales_engine
   def setup
     @sales_engine = SalesEngine.new
-    @item_repository = ItemRepository.new(sales_engine)
-    item_repository.load_file("./fixtures/items_testdata.csv")
+    @item_repository = ItemRepository.new(sales_engine, "./fixtures/items_testdata.csv")
+    item_repository.load_file
   end
 
   def test_load_test_datafile

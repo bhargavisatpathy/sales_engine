@@ -10,8 +10,8 @@ class TransactionRepositoryTest < Minitest::Test
   attr_reader :transaction_repository, :sales_engine
   def setup
     @sales_engine = SalesEngine.new
-    @transaction_repository = TransactionRepository.new(sales_engine)
-    transaction_repository.load_file("./fixtures/transactions_testdata.csv")
+    @transaction_repository = TransactionRepository.new(sales_engine, "./fixtures/transactions_testdata.csv")
+    transaction_repository.load_file
   end
   def test_load_test_datafile
     assert_equal 24, transaction_repository.find_all.length

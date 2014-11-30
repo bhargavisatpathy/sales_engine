@@ -25,12 +25,12 @@ class SalesEngineTest < Minitest::Test
     assert sales_engine.transaction_repository
   end
   def test_it_delegates_startup_to_repository_load_files
-    sales_engine.merchant_repository.expect(:load_file, nil, ["./data/merchants.csv"])
-    sales_engine.invoice_repository.expect(:load_file, nil, ["./data/invoices.csv"])
-    sales_engine.item_repository.expect(:load_file, nil, ["./data/items.csv"])
-    sales_engine.invoice_item_repository.expect(:load_file, nil, ["./data/invoice_items.csv"])
-    sales_engine.customer_repository.expect(:load_file, nil, ["./data/customers.csv"])
-    sales_engine.transaction_repository.expect(:load_file, nil, ["./data/transactions.csv"])
+    sales_engine.merchant_repository.expect(:load_file, nil, [])
+    sales_engine.invoice_repository.expect(:load_file, nil, [])
+    sales_engine.item_repository.expect(:load_file, nil, [])
+    sales_engine.invoice_item_repository.expect(:load_file, nil, [])
+    sales_engine.customer_repository.expect(:load_file, nil, [])
+    sales_engine.transaction_repository.expect(:load_file, nil, [])
     sales_engine.startup
     sales_engine.merchant_repository.verify
     sales_engine.invoice_repository.verify
