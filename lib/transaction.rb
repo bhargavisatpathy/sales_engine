@@ -13,6 +13,6 @@ class Transaction
   end
 
   def invoice
-    repository.find_invoice(id)
+    repository.find_invoice(invoice_id)
   end
 end

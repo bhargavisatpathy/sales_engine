@@ -42,7 +42,7 @@ class TransactionRepository < Repository
     find_all_by_X(:result, result)
   end
 
-  def find_invoice(id)
-    sales_engine.find_invoice_with(id)
+  def find_invoice(invoice_id)
+    sales_engine.find_invoice(invoice_id)
   end
 end

@@ -10,4 +10,10 @@ class InvoiceItem
     @updated_at = row[:updated_at]
     @repository = repository
   end
+  def invoice
+    repository.find_invoice(invoice_id)
+  end
+  def item
+    repository.find_item(item_id)
+  end
 end

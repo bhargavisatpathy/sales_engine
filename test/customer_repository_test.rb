@@ -28,4 +28,12 @@ class CustomerRepositoryTest < Minitest::Test
   def test_find_all_by_last_name_will_return_3_named_rodriguez
     assert_equal 3, customer_repository.find_all_by_last_name("Rodriguez").count
   end
+
+  def test_it_delegates_find_invoices_to_sales_engine
+    parent = Minitest::Mock.new
+    customer_repository = CustomerRepository.new(parent)
+    parent.expect(:find_invoices_by_customer, nil, ["1"])
+    customer_repository.find_invoices("1")
+    parent.verify
+  end
 end

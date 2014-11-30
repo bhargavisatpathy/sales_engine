@@ -15,7 +15,7 @@ require_relative 'transaction_repository'
 
 class SalesEngine
 
-  attr_reader :merchant_repository, :invoice_repository, :item_repository,
+  attr_accessor :merchant_repository, :invoice_repository, :item_repository,
               :invoice_item_repository, :customer_repository, :transaction_repository
 
   def initialize
@@ -34,14 +34,43 @@ class SalesEngine
     customer_repository.load_file("./data/customers.csv")
     transaction_repository.load_file("./data/transactions.csv")
   end
-  def find_invoices_by_customer_id(id)
+  def find_invoices_by_customer(id)
     invoice_repository.find_all_by_customer_id(id)
   end
-  def find_invoice_with(invoice_id)
-    invoice_repository.find_by_id(invoice_id)
+  def find_invoice(id)
+    invoice_repository.find_by_id(id)
   end
-  def find_invoice_items_with(id)
+  def find_invoice_items_by_item(id)
     invoice_item_repository.find_all_by_item_id(id)
+  end
+  def find_merchant(id)
+    merchant_repository.find_by_id(id)
+  end
+  def find_invoice(id)
+    invoice_repository.find_by_id(id)
+  end
+  def find_item(id)
+    item_repository.find_by_id(id)
+  end
+  def find_transactions_by_invoice(id)
+    transaction_repository.find_all_by_invoice_id(id)
+  end
+  def find_invoice_items_by_invoice(id)
+    invoice_item_repository.find_all_by_invoice_id(id)
+  end
+  def find_items_by_invoice(id)
+    invoice_item_repository.find_all_by_invoice_id(id).map do |invoice_item|
+      item_repository.find_by_id(invoice_item.item_id)
+    end
+  end
+  def find_customer(id)
+    customer_repository.find_by_id(id)
+  end
+  def find_items_by_merchant(id)
+    item_repository.find_all_by_merchant_id(id)
+  end
+  def find_invoices_by_merchant(id)
+    invoice_repository.find_all_by_merchant_id(id)
   end
 end
 

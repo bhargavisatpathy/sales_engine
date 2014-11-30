@@ -42,4 +42,11 @@ class InvoiceItemRepository < Repository
   def find_all_by_unit_price(unit_price)
     find_all_by_X(:unit_price, unit_price)
   end
+
+  def find_invoice(invoice_id)
+    sales_engine.find_invoice(invoice_id)
+  end
+  def find_item(item_id)
+    sales_engine.find_item(item_id)
+  end
 end

@@ -33,4 +33,20 @@ class InvoiceRepository < Repository
   def find_all_by_status(status)
     find_all_by_X(:status, status)
   end
+
+  def find_transactions(id)
+    sales_engine.find_transactions_by_invoice(id)
+  end
+  def find_invoice_items(id)
+    sales_engine.find_invoice_items_by_invoice(id)
+  end
+  def find_items(id)
+    sales_engine.find_items_by_invoice(id)
+  end
+  def find_customer(customer_id)
+    sales_engine.find_customer(customer_id)
+  end
+  def find_merchant(merchant_id)
+    sales_engine.find_merchant(merchant_id)
+  end
 end
