@@ -1,5 +1,5 @@
 class InvoiceItem
-  attr_reader :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
+  attr_reader :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at, :repository
   def initialize(row, repository)
     @id         = row[:id]
     @item_id    = row[:item_id]

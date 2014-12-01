@@ -1,5 +1,5 @@
 class Item
-  attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at
+  attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at,  :repository
 
   def initialize(row, repository)
     @id           = row[:id]
@@ -11,9 +11,11 @@ class Item
     @updated_at   = row[:updated_at]
     @repository   = repository
   end
+ 
   def invoice_items
     repository.find_invoice_items(id)
   end
+  
   def merchant
     repository.find_merchant(merchant_id)
   end

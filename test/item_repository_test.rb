@@ -50,5 +50,20 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 4, item_repository.find_all_by_merchant_id("2").count
   end
 
+  def test_it_delegates_find_invoice_items_to_sales_engine
+    parent = Minitest::Mock.new
+    item_repository = ItemRepository.new(parent, nil)
+    parent.expect(:find_invoice_items_by_item, nil, ["1"])
+    item_repository.find_invoice_items("1")
+    parent.verify
+  end
+
+  def test_it_delegates_find_merchant_to_sales_engine
+    parent = Minitest::Mock.new
+    item_repository = ItemRepository.new(parent, nil)
+    parent.expect(:find_merchant, nil, ["1"])
+    item_repository.find_merchant("1")
+    parent.verify
+  end
 
 end

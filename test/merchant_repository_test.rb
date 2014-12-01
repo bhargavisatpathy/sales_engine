@@ -23,4 +23,20 @@ class MerchantRepositoryTest < Minitest::Test
   def test_find_all_by_name
     assert_equal 2, merchant_repository.find_all_by_name("Williamson Group").count
   end
+
+  def test_it_delegates_find_items_to_sales_engine
+    parent = Minitest::Mock.new
+    merchant_repository = MerchantRepository.new(parent, nil)
+    parent.expect(:find_items_by_merchant, nil, ["1"])
+    merchant_repository.find_items("1")
+    parent.verify
+  end
+
+  def test_it_delegates_find_invoices_to_sales_engine
+    parent = Minitest::Mock.new
+    merchant_repository = MerchantRepository.new(parent, nil)
+    parent.expect(:find_invoices_by_merchant, nil, ["1"])
+    merchant_repository.find_invoices("1")
+    parent.verify
+  end
 end

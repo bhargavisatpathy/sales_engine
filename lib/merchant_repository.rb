@@ -17,7 +17,7 @@ class MerchantRepository < Repository
   def find_all_by_name(name)
     find_all_by_X(:name, name)
   end
-  def find_items(id)
+  def find_items(id) #this is the merchannt_id
     sales_engine.find_items_by_merchant(id)
   end
   def find_invoices(id)
