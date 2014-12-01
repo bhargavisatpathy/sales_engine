@@ -17,4 +17,6 @@ class MerchantRepository < Repository
   def find_all_by_name(name)
     find_all_by_X(:name, name)
   end
+
+  
 end
