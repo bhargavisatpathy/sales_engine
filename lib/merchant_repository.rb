@@ -23,4 +23,10 @@ class MerchantRepository < Repository
   def find_invoices(id)
     sales_engine.find_invoices_by_merchant(id)
   end
+  def most_revenue(x)
+    all.sort { |a, b| b.revenue <=> a.revenue }.take(x)
+  end
+  def inspect
+    " #{self.class} #{@entities.size} "
+  end
 end

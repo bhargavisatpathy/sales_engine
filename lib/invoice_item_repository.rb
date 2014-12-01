@@ -49,4 +49,7 @@ class InvoiceItemRepository < Repository
   def find_item(item_id)
     sales_engine.find_item(item_id)
   end
+  def inspect
+    " #{self.class} #{@entities.size} "
+  end
 end

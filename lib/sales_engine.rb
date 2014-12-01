@@ -15,16 +15,17 @@ require_relative 'transaction_repository'
 
 class SalesEngine
 
-  attr_accessor :merchant_repository, :invoice_repository, :item_repository,
+  attr_accessor :dir, :merchant_repository, :invoice_repository, :item_repository,
               :invoice_item_repository, :customer_repository, :transaction_repository
 
-  def initialize
-    @merchant_repository      = MerchantRepository.new(self, "./data/merchants.csv") 
-    @invoice_repository       = InvoiceRepository.new(self, "./data/invoices.csv")
-    @item_repository          = ItemRepository.new(self, "./data/items.csv")
-    @invoice_item_repository  = InvoiceItemRepository.new(self, "./data/invoice_items.csv")
-    @customer_repository      = CustomerRepository.new(self, "./data/customers.csv")
-    @transaction_repository   = TransactionRepository.new(self, "./data/transactions.csv")
+  def initialize(dir = "./csvs")
+    @dir                      = dir
+    @merchant_repository      = MerchantRepository.new(self, "#{dir}/merchants.csv")
+    @invoice_repository       = InvoiceRepository.new(self, "#{dir}/invoices.csv")
+    @item_repository          = ItemRepository.new(self, "#{dir}/items.csv")
+    @invoice_item_repository  = InvoiceItemRepository.new(self, "#{dir}/invoice_items.csv")
+    @customer_repository      = CustomerRepository.new(self, "#{dir}/customers.csv")
+    @transaction_repository   = TransactionRepository.new(self, "#{dir}/transactions.csv")
   end
   def startup
     merchant_repository.load_file

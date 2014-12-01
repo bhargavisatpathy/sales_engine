@@ -9,11 +9,11 @@ class Repository
     @filename = filename
   end
 
-  def find_all
+  def all
     entities
   end
 
-  def find_random
+  def random
     record_number = rand(0..entities.length - 1)
     entities[record_number]
   end
@@ -33,10 +33,13 @@ class Repository
   protected
 
   def find_by_X(attribute, criteria)
-    find_all.detect { |entity| entity.send(attribute).downcase == criteria.downcase }
+    all.detect { |entity| entity.send(attribute).to_s.downcase == criteria.to_s.downcase }
   end
 
   def find_all_by_X(attribute, criteria)
-    find_all.select { |entity| entity.send(attribute).downcase == criteria.downcase }
+    all.select { |entity| entity.send(attribute).to_s.downcase == criteria.to_s.downcase }
+  end
+  def inspect
+    " #{self.class} #{@entities.size} "
   end
 end

@@ -1,8 +1,8 @@
 class Merchant
-  attr_reader :id, :name, :created_at, :updated_at
+  attr_reader :id, :name, :created_at, :updated_at, :repository
 
   def initialize(row, repository)
-    @id           = row[:id]
+    @id           = row[:id].to_i
     @name         = row[:name]
     @created_at   = row[:created_at]
     @updated_at   = row[:updated_at]
@@ -13,5 +13,8 @@ class Merchant
   end
   def invoices
     repository.find_invoices(id)
+  end
+  def revenue
+    invoices.reduce {|sum, invoice| sum + invoice.revenue}
   end
 end

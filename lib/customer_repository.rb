@@ -29,5 +29,7 @@ class CustomerRepository < Repository
   def find_invoices(id)
     sales_engine.find_invoices_by_customer(id)
   end
-
+  def inspect
+    " #{self.class} #{@entities.size} "
+  end
 end

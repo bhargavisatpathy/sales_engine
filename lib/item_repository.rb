@@ -48,4 +48,13 @@ class ItemRepository < Repository
   def find_merchant(merchant_id)
     sales_engine.find_merchant(merchant_id)
   end
+  def inspect
+    " #{self.class} #{@entities.size} "
+  end
+  def most_revenue(x)
+
+  end
+  def most_items(x)
+
+  end
 end

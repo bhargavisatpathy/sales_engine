@@ -45,4 +45,8 @@ class TransactionRepository < Repository
   def find_invoice(invoice_id)
     sales_engine.find_invoice(invoice_id)
   end
+
+  def inspect
+    " #{self.class} #{@entities.size} "
+  end
 end
