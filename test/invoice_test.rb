@@ -29,7 +29,8 @@ class InvoiceTest < Minitest::Test
     assert_equal 1, invoice.customer_id
     assert_equal 26, invoice.merchant_id
     assert_equal 'shipped', invoice.status
-    assert_equal '2012-03-25 09:54:09 UTC', invoice.created_at
+    assert_equal Time.strptime('2012-03-25 09:54:09 UTC', "%Y-%m-%d %H:%M:%S"), 
+                  invoice.created_at
     assert_equal '2012-03-25 09:54:09 UTC', invoice.updated_at
   end
 

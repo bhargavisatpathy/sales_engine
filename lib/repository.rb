@@ -1,12 +1,19 @@
 require 'csv'
 
 class Repository
-  attr_reader :entities, :sales_engine, :filename
+  attr_reader :sales_engine, :filename
 
   def initialize(sales_engine, filename)
     @sales_engine = sales_engine
-    @entities = []
     @filename = filename
+  end
+
+  def entities
+    @entities ||= load_file
+  end
+
+  def load_file # override this in subclasses to get proper fileloading
+    []
   end
 
   def all

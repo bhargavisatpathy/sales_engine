@@ -28,12 +28,7 @@ class SalesEngine
     @transaction_repository   = TransactionRepository.new(self, "#{dir}/transactions.csv")
   end
   def startup
-    merchant_repository.load_file
-    invoice_repository.load_file
-    item_repository.load_file
-    invoice_item_repository.load_file
-    customer_repository.load_file
-    transaction_repository.load_file
+    puts "starting up cap'n"
   end
   def find_invoices_by_customer(id)
     invoice_repository.find_all_by_customer_id(id)
@@ -75,8 +70,8 @@ class SalesEngine
   end
 end
 
-#engine = SalesEngine.new
-#engine.startup
+engine = SalesEngine.new
+engine.startup
 
 # engine.merchant_repository
 # engine.invoice_repository
@@ -85,4 +80,6 @@ end
 # engine.customer_repository
 # engine.transaction_repository
 #engine.invoice_repository.all.each { |invoice| puts invoice.revenue}
-#engine.merchant_repository.most_revenue(3).each { |merchant| puts merchant.name}
+#engine.merchant_repository.all.each { |merchant| puts merchant.revenue}
+# merchants = engine.merchant_repository.most_revenue(3).each { |merchant| puts merchant.name}
+# puts "found top merchants: #{merchants.map(&:name)}, with revenues #{merchants.map(&:revenue)}"

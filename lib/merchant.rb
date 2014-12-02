@@ -8,15 +8,22 @@ class Merchant
     @updated_at   = row[:updated_at]
     @repository   = repository
   end
-  
+
   def items
     repository.find_items(id)
   end
-  
+
   def invoices
-    repository.find_invoices(id)
+    @invoices ||= repository.find_invoices(id)
   end
+
   def revenue
-    invoices.reduce(0) {|sum, invoice| sum + invoice.revenue}
+    @revenue ||= calculate_revenue
+  end
+
+  def calculate_revenue
+    invoices.reduce(0) do |sum, invoice|
+      sum + invoice.revenue
+    end
   end
 end
