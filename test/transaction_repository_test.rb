@@ -37,7 +37,7 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 3, transaction_repository.find_all_by_invoice_id("12").count
   end
 
-   def test_find_all_by_credit_card_number
+  def test_find_all_by_credit_card_number
     assert_equal 1, transaction_repository.find_all_by_credit_card_number("4654405418249632").count
   end
 
@@ -46,8 +46,16 @@ class TransactionRepositoryTest < Minitest::Test
   #   assert_equal 0, transaction_repository.find_all_by_credit_card_expiration_date("").count
   # end
 
-   def test_find_all_by_result
+  def test_find_all_by_result
     assert_equal 4, transaction_repository.find_all_by_result("failed").count
+  end
+
+  def test_it_delegates_find_invoice_to_sales_engine
+    parent = Minitest::Mock.new
+    transaction_repository = TransactionRepository.new(parent, nil)
+    parent.expect(:find_invoice, nil, ["1"])
+    transaction_repository.find_invoice("1")
+    parent.verify
   end
 
 end

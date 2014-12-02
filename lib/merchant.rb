@@ -8,9 +8,11 @@ class Merchant
     @updated_at   = row[:updated_at]
     @repository   = repository
   end
+  
   def items
     repository.find_items(id)
   end
+  
   def invoices
     repository.find_invoices(id)
   end

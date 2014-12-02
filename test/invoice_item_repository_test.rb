@@ -52,4 +52,20 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_find_all_by_unit_price
     assert_equal 3, invoice_item_repository.find_all_by_unit_price("72018").count
   end
+
+  def test_it_delegates_find_invoices_to_sales_engine
+    parent = Minitest::Mock.new
+    invoice_item_repository = InvoiceItemRepository.new(parent, nil)
+    parent.expect(:find_invoice, nil, ["1"])
+    invoice_item_repository.find_invoice("1")
+    parent.verify
+  end
+
+   def test_it_delegates_find_items_to_sales_engine
+    parent = Minitest::Mock.new
+    invoice_item_repository = InvoiceItemRepository.new(parent, nil)
+    parent.expect(:find_item, nil, ["1"])
+    invoice_item_repository.find_item("1")
+    parent.verify
+  end
 end

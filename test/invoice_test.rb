@@ -20,7 +20,11 @@ class InvoiceTest < Minitest::Test
     @invoice = Invoice.new(data, parent)
   end
 
-  def test_invoice_test_attributes
+  def test_it_exists
+    assert invoice
+  end
+
+  def test_invoice_has_attributes
     assert_equal '1', invoice.id
     assert_equal '1', invoice.customer_id
     assert_equal '26', invoice.merchant_id
@@ -34,6 +38,36 @@ class InvoiceTest < Minitest::Test
     unpaid_transaction = Transaction.new({result: 'failed'}, nil)
     parent.expect(:find_transactions, [unpaid_transaction, paid_transaction], ['1'])
     assert invoice.paid?
+    parent.verify
+  end
+
+  def test_it_delegates_transactions_to_its_repository
+    parent.expect(:find_transactions, nil, ["1"])
+    invoice.transactions
+    parent.verify
+  end
+
+  def test_it_delegates_invoice_items_to_its_repository
+    parent.expect(:find_invoice_items, nil, ["1"])
+    invoice.invoice_items
+    parent.verify
+  end
+
+  def test_it_delegates_items_to_its_repository
+    parent.expect(:find_items, nil, ["1"])
+    invoice.items
+    parent.verify
+  end
+
+  def test_it_delegates_customer_to_its_repository
+    parent.expect(:find_customer, nil, ["1"])
+    invoice.customer
+    parent.verify
+  end
+
+  def test_it_delegates_merchant_to_its_repository
+    parent.expect(:find_merchant, nil, ["26"])
+    invoice.merchant
     parent.verify
   end
 end

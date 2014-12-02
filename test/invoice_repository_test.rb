@@ -41,4 +41,43 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal 24, invoice_repository.find_all_by_status("shipped").count
   end
 
+  def test_it_delegates_find_transactions_to_sales_engine
+    parent = Minitest::Mock.new
+    invoice_repository = InvoiceRepository.new(parent, nil)
+    parent.expect(:find_transactions_by_invoice, nil, ["1"])
+    invoice_repository.find_transactions("1")
+    parent.verify
+  end
+
+  def test_it_delegates_find_invoice_items_to_sales_engine
+    parent = Minitest::Mock.new
+    invoice_repository = InvoiceRepository.new(parent, nil)
+    parent.expect(:find_invoice_items_by_invoice, nil, ["1"])
+    invoice_repository.find_invoice_items("1")
+    parent.verify
+  end
+
+  def test_it_delegates_find_items_to_sales_engine
+    parent = Minitest::Mock.new
+    invoice_repository = InvoiceRepository.new(parent, nil)
+    parent.expect(:find_items_by_invoice, nil, ["1"])
+    invoice_repository.find_items("1")
+    parent.verify
+  end
+
+  def test_it_delegates_find_customer_id_to_sales_engine
+    parent = Minitest::Mock.new
+    invoice_repository = InvoiceRepository.new(parent, nil)
+    parent.expect(:find_customer, nil, ["1"])
+    invoice_repository.find_customer("1")
+    parent.verify
+  end
+
+  def test_it_delegates_find_merchant_id_to_sales_engine
+    parent = Minitest::Mock.new
+    invoice_repository = InvoiceRepository.new(parent, nil)
+    parent.expect(:find_merchant, nil, ["1"])
+    invoice_repository.find_merchant("1")
+    parent.verify
+  end
 end
