@@ -31,7 +31,7 @@ class Invoice
   def revenue
     revenue = 0
     if paid?
-      revenue = invoice_items.reduce { |sum, invoice_item| sum + (invoice_item.quantity * invoice_item.unit_price)}
+      revenue = invoice_items.reduce(0) { |sum, invoice_item| sum + (invoice_item.quantity * invoice_item.unit_price)}
     end
     revenue
   end

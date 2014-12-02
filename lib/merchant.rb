@@ -17,6 +17,6 @@ class Merchant
     repository.find_invoices(id)
   end
   def revenue
-    invoices.reduce {|sum, invoice| sum + invoice.revenue}
+    invoices.reduce(0) {|sum, invoice| sum + invoice.revenue}
   end
 end

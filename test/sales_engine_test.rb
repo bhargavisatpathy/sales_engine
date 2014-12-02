@@ -40,8 +40,8 @@ class SalesEngineTest < Minitest::Test
     sales_engine.transaction_repository.verify
   end
   def test_it_delegates_find_invoices_by_customer_to_invoice_repository
-    sales_engine.invoice_repository.expect(:find_all_by_customer_id, nil, ['1'])
-    sales_engine.find_invoices_by_customer('1')
+    sales_engine.invoice_repository.expect(:find_all_by_customer_id, nil, [1])
+    sales_engine.find_invoices_by_customer(1)
     sales_engine.invoice_repository.verify
   end
 end

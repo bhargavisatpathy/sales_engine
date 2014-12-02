@@ -18,7 +18,7 @@ class TransactionTest < Minitest::Test
     }
 
     @parent = Minitest::Mock.new
-    transaction = Transaction.new(data,parent)
+    @transaction = Transaction.new(data, parent)
   end
 
   def test_it_exists
@@ -26,8 +26,8 @@ class TransactionTest < Minitest::Test
   end
 
   def test_transaction_has_attributes
-    assert_equal '1', transaction.id
-    assert_equal '1', transaction.invoice_id
+    assert_equal 1, transaction.id
+    assert_equal 1, transaction.invoice_id
     assert_equal '4654405418249632', transaction.credit_card_number
     assert_equal nil, transaction.credit_card_expiration_date
     assert_equal 'success', transaction.result
@@ -36,7 +36,7 @@ class TransactionTest < Minitest::Test
   end
 
   def test_it_delegates_transactions_into_its_repository
-    parent.expect(:find_invoice, nil, ["1"])
+    parent.expect(:find_invoice, nil, [1])
     transaction.invoice
     parent.verify
 

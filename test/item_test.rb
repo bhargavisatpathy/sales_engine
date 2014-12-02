@@ -25,25 +25,23 @@ class ItemTest < Minitest::Test
   end
 
   def test_item_test_attributes
-    assert_equal '1', item.id
+    assert_equal 1, item.id
     assert_equal 'Item Qui Esse', item.name
     assert_equal 'Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.', item.description
-    assert_equal '75107', item.unit_price
-    assert_equal '1', item.merchant_id
+    assert_equal BigDecimal("751.07"), item.unit_price
+    assert_equal 1, item.merchant_id
     assert_equal '2012-03-27 14:53:59 UTC', item.created_at
     assert_equal '2012-03-27 14:53:59 UTC', item.updated_at
   end
 
   def test_it_delegates_invoice_items_to_its_repository
-
-    parent.expect(:find_invoice_items, nil, ["1"])
+    parent.expect(:find_invoice_items, nil, [1])
     item.invoice_items
     parent.verify
   end
 
   def test_it_delegates_merchant_to_its_repository
-
-    parent.expect(:find_merchant, nil, ["1"])
+    parent.expect(:find_merchant, nil, [1])
     item.merchant
     parent.verify
   end

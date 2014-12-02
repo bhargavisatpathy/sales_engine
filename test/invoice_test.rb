@@ -25,9 +25,9 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_invoice_has_attributes
-    assert_equal '1', invoice.id
-    assert_equal '1', invoice.customer_id
-    assert_equal '26', invoice.merchant_id
+    assert_equal 1, invoice.id
+    assert_equal 1, invoice.customer_id
+    assert_equal 26, invoice.merchant_id
     assert_equal 'shipped', invoice.status
     assert_equal '2012-03-25 09:54:09 UTC', invoice.created_at
     assert_equal '2012-03-25 09:54:09 UTC', invoice.updated_at
@@ -36,37 +36,37 @@ class InvoiceTest < Minitest::Test
   def test_invoice_is_paid
     paid_transaction = Transaction.new({result: 'success'}, nil)
     unpaid_transaction = Transaction.new({result: 'failed'}, nil)
-    parent.expect(:find_transactions, [unpaid_transaction, paid_transaction], ['1'])
+    parent.expect(:find_transactions, [unpaid_transaction, paid_transaction], [1])
     assert invoice.paid?
     parent.verify
   end
 
   def test_it_delegates_transactions_to_its_repository
-    parent.expect(:find_transactions, nil, ["1"])
+    parent.expect(:find_transactions, nil, [1])
     invoice.transactions
     parent.verify
   end
 
   def test_it_delegates_invoice_items_to_its_repository
-    parent.expect(:find_invoice_items, nil, ["1"])
+    parent.expect(:find_invoice_items, nil, [1])
     invoice.invoice_items
     parent.verify
   end
 
   def test_it_delegates_items_to_its_repository
-    parent.expect(:find_items, nil, ["1"])
+    parent.expect(:find_items, nil, [1])
     invoice.items
     parent.verify
   end
 
   def test_it_delegates_customer_to_its_repository
-    parent.expect(:find_customer, nil, ["1"])
+    parent.expect(:find_customer, nil, [1])
     invoice.customer
     parent.verify
   end
 
   def test_it_delegates_merchant_to_its_repository
-    parent.expect(:find_merchant, nil, ["26"])
+    parent.expect(:find_merchant, nil, [26])
     invoice.merchant
     parent.verify
   end

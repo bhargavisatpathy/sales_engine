@@ -75,12 +75,14 @@ class SalesEngine
   end
 end
 
-engine = SalesEngine.new
-engine.startup
+#engine = SalesEngine.new
+#engine.startup
 
-engine.merchant_repository
-engine.invoice_repository
-engine.item_repository
-engine.invoice_item_repository
-engine.customer_repository
-engine.transaction_repository
+# engine.merchant_repository
+# engine.invoice_repository
+# engine.item_repository
+# engine.invoice_item_repository
+# engine.customer_repository
+# engine.transaction_repository
+#engine.invoice_repository.all.each { |invoice| puts invoice.revenue}
+#engine.merchant_repository.most_revenue(3).each { |merchant| puts merchant.name}
