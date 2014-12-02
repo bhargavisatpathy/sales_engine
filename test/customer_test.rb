@@ -26,8 +26,8 @@ class CustomerTest < Minitest::Test
     assert_equal 1, customer.id
     assert_equal 'Joey', customer.first_name
     assert_equal 'Ondricka', customer.last_name
-    assert_equal '2012-03-27 14:54:09 UTC', customer.created_at
-    assert_equal '2012-03-27 14:54:09 UTC', customer.updated_at
+    assert_equal Date.new(2012,3,27), customer.created_at
+    assert_equal Date.new(2012,3,27), customer.updated_at
   end
 
   def test_it_delegates_invoices_to_its_repository
