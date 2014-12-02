@@ -31,7 +31,7 @@ class Invoice
     transactions.any? {|transaction| transaction.result == "success"}
   end
   def revenue
-    @revenue ||= calculate_revenue
+      @revenue ||= calculate_revenue
   end
 
   def calculate_revenue

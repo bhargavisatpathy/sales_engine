@@ -5,8 +5,8 @@ class Merchant
   def initialize(row, repository)
     @id           = row[:id].to_i
     @name         = row[:name]
-    @created_at = Date.parse(row[:created_at])
-    @updated_at = Date.parse(row[:updated_at])
+    @created_at   = Date.parse(row[:created_at])
+    @updated_at   = Date.parse(row[:updated_at])
     @repository   = repository
   end
 
@@ -32,11 +32,12 @@ class Merchant
         sum + invoice.revenue
       end
     else
-      invoices.reduce(0) do |sum, invoice|
-        if date == invoice.created_at
-          sum + invoice.revenue
-        end
-      end
+      invoices.select { |invoice| invoice.updated_at == date }.reduce(0) { |sum, invoice| sum + invoice.revenue}
+      # invoices.reduce(0) do |sum, invoice|
+      #   if invoice.updated_at == date
+      #     sum + invoice.revenue
+      #   end
+      # end
     end
   end
 end
