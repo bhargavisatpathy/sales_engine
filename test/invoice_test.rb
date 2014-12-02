@@ -34,8 +34,8 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_invoice_is_paid
-    paid_transaction = Transaction.new({result: 'success'}, nil)
-    unpaid_transaction = Transaction.new({result: 'failed'}, nil)
+    paid_transaction = Transaction.new({result: 'success', created_at: '2012-03-25 09:54:09 UTC', updated_at: '2012-03-25 09:54:09 UTC'}, nil)
+    unpaid_transaction = Transaction.new({result: 'failed', created_at: '2012-03-25 09:54:09 UTC', updated_at: '2012-03-25 09:54:09 UTC'}, nil)
     parent.expect(:find_transactions, [unpaid_transaction, paid_transaction], [1])
     assert invoice.paid?
     parent.verify
