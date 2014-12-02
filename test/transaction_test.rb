@@ -31,8 +31,8 @@ class TransactionTest < Minitest::Test
     assert_equal '4654405418249632', transaction.credit_card_number
     assert_equal nil, transaction.credit_card_expiration_date
     assert_equal 'success', transaction.result
-    assert_equal '2012-03-27 14:54:09 UTC', transaction.created_at
-    assert_equal '2012-03-27 14:54:09 UTC', transaction.updated_at
+    assert_equal Date.new(2012,3,27), transaction.created_at
+    assert_equal Date.new(2012,3,27), transaction.updated_at
   end
 
   def test_it_delegates_transactions_into_its_repository

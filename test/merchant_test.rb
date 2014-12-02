@@ -26,8 +26,8 @@ class MerchantTest < Minitest::Test
   def test_merchant_test_attributes
     assert_equal 1, merchant.id
     assert_equal 'Schroeder-Jerde', merchant.name
-    assert_equal '2012-03-27 14:54:00 UTC', merchant.created_at
-    assert_equal '2012-03-27 14:54:00 UTC', merchant.updated_at
+    assert_equal Date.new(2012,3,27), merchant.created_at
+    assert_equal Date.new(2012,3,27), merchant.updated_at
   end
 
   def test_it_delegates_items_to_its_repository
