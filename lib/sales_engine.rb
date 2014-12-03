@@ -68,10 +68,18 @@ class SalesEngine
   def find_invoices_by_merchant(id)
     invoice_repository.find_all_by_merchant_id(id)
   end
+
+  def create_invoice_item(input)
+    invoice_item_repository.create(input)
+  end
+
+  def create_transaction(input)
+    transaction_repository.create(input)
+  end
 end
 
-engine = SalesEngine.new
-engine.startup
+# engine = SalesEngine.new
+# engine.startup
 
 # engine.merchant_repository
 # engine.invoice_repository

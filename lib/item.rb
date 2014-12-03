@@ -38,4 +38,9 @@ class Item
                  .group_by { |invoice_item| invoice_item.invoice.created_at }.to_a
     date_items.max_by { |pair| pair[1].reduce(0) { |sum, invoice_item| sum + invoice_item.quantity }}[0]
   end
+
+  def clear_cache
+    @revenue = nil
+    @quantity_sold = nil
+  end
 end

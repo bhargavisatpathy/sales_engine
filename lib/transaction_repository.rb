@@ -46,6 +46,19 @@ class TransactionRepository < Repository
     sales_engine.find_invoice(invoice_id)
   end
 
+  def create(input)
+    input[:id] = next_id
+    input[:created_at] = Time.now.to_s
+    input[:updated_at] = Time.now.to_s
+    new_row = Transaction.new(input, self)
+    @entities << new_row
+    new_row.invoice.customer.clear_cache
+    new_row.invoice.merchant.clear_cache
+    new_row.invoice.invoice_items.each { |invoice_item| invoice_item.item.clear_cache}
+    new_row.invoice.clear_cache
+    new_row
+  end
+
   def inspect
     " #{self.class} #{@entities.size} "
   end

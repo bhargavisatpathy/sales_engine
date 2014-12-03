@@ -37,6 +37,11 @@ class Repository
     find_by_X(:updated_at, updated_at)
   end
 
+  def next_id
+    return 1 if all.empty?
+    all.max_by { |entity| entity.id }.id + 1
+  end
+
   protected
 
   def find_by_X(attribute, criteria)

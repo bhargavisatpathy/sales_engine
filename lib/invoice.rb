@@ -12,7 +12,7 @@ class Invoice
     @repository  = repository
   end
   def transactions
-    @transaction ||= repository.find_transactions(id)
+    @transactions ||= repository.find_transactions(id)
   end
   def invoice_items
     @invoice_items ||= repository.find_invoice_items(id)
@@ -45,5 +45,14 @@ class Invoice
   def calculate_items_sold
     return 0 unless paid?
     invoice_items.reduce(0) { |sum, invoice_item| sum + invoice_item.quantity }
+  end
+
+  def charge(input)
+    input[:invoice_id] = id
+    repository.create_transaction(input)
+  end
+
+  def clear_cache
+    @transactions = nil
   end
 end

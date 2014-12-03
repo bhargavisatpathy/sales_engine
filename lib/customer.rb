@@ -21,4 +21,7 @@ class Customer
     merchant_invoices = invoices.select { |invoice| invoice.paid? }.group_by { |invoice| invoice.merchant }.to_a
     merchant_invoices.max_by { |pair| pair[1].length }[0]
   end
+  def clear_cache
+    @invoices = nil
+  end
 end

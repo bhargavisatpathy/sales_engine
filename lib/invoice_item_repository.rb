@@ -49,6 +49,16 @@ class InvoiceItemRepository < Repository
   def find_item(item_id)
     sales_engine.find_item(item_id)
   end
+
+  def create(input)
+    new_row = InvoiceItem.new({id: next_id, item_id: input[:item].id, invoice_id: input[:invoice_id],
+       quantity: input[:quantity], unit_price: input[:item].unit_price,
+       created_at: Time.now.to_s, updated_at: Time.now.to_s}, self)
+    @entities << new_row
+    input[:item].clear_cache
+    new_row
+  end
+
   def inspect
     " #{self.class} #{@entities.size} "
   end

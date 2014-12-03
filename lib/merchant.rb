@@ -11,7 +11,7 @@ class Merchant
   end
 
   def items
-    repository.find_items(id)
+    @items ||= repository.find_items(id)
   end
 
   def invoices
@@ -45,5 +45,12 @@ class Merchant
 
   def customers_with_pending_invoices
     invoices.select { |invoice| !invoice.paid? }.group_by { |invoice| invoice.customer }.keys
+  end
+
+  def clear_cache
+    @invoices = nil
+    @items_sold = nil
+    @revenue = nil
+    @items = nil
   end
 end

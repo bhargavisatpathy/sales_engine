@@ -54,18 +54,23 @@ class InvoiceRepository < Repository
     sales_engine.find_merchant(merchant_id)
   end
 
-  def next_id
-    return 1 if all.empty?
-    all.max_by { |invoice| invoice.id }.id + 1
-  end
-
   def create(input)
     invoice_id = next_id
-    invoice.new(id: invoice_id, customer_id: input[:customer].id, merchant_id: input[:merchant].id,
-    status: input[:status], created_at: Time.now.to_s, updated_at: Time.now.to_s)
-    input[:items].group_by { |item| item.id }.to_a
+    new_row = Invoice.new({id: invoice_id, customer_id: input[:customer].id, merchant_id: input[:merchant].id,
+                status: input[:status], created_at: Time.now.to_s, updated_at: Time.now.to_s}, self)
+    @entities << new_row
+    input[:items].group_by { |item| item.id }
+      .each_value do |items|
+         sales_engine.create_invoice_item(invoice_id: invoice_id, quantity: items.length, item: items[0])
+      end
+    input[:customer].clear_cache
+    input[:merchant].clear_cache
+    new_row
   end
 
+  def create_transaction(input)
+    sales_engine.create_transaction(input)
+  end
   def inspect
     " #{self.class} #{@entities.size} "
   end
