@@ -12,12 +12,13 @@ class Customer
   end
 
   def invoices
-    repository.find_invoices(id)
+    @invoices ||= repository.find_invoices(id)
   end
   def transactions
-
+    invoices.reduce([]) { |trans, invoice| trans << invoice.transactions }
   end
   def favorite_merchant
-
+    merchant_invoices = invoices.select { |invoice| invoice.paid? }.group_by { |invoice| invoice.merchant }.to_a
+    merchant_invoices.max_by { |pair| pair[1].length }[0]
   end
 end

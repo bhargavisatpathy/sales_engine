@@ -16,7 +16,7 @@ class InvoiceItem
     @total_price= unit_price * quantity
   end
   def invoice
-    repository.find_invoice(invoice_id)
+    @invoice ||= repository.find_invoice(invoice_id)
   end
   def item
     repository.find_item(item_id)

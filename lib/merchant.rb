@@ -22,22 +22,28 @@ class Merchant
     if date.nil?
       @revenue ||= calculate_revenue
     else
-      @revenue ||= calculate_revenue(date)
+      calculate_revenue(date)
     end
   end
 
   def calculate_revenue(date = nil)
     if date.nil?
-      invoices.reduce(0) do |sum, invoice|
-        sum + invoice.revenue
-      end
+      invoices.reduce(0) { |sum, invoice| sum + invoice.revenue }
     else
       invoices.select { |invoice| invoice.updated_at == date }.reduce(0) { |sum, invoice| sum + invoice.revenue}
-      # invoices.reduce(0) do |sum, invoice|
-      #   if invoice.updated_at == date
-      #     sum + invoice.revenue
-      #   end
-      # end
     end
+  end
+
+  def items_sold
+    @items_sold ||= invoices.reduce(0) { |sum, invoice| sum + invoice.items_sold }
+  end
+
+  def favorite_customer
+    customer_invoices = invoices.select { |invoice| invoice.paid? }.group_by { |invoice| invoice.customer }.to_a
+    customer_invoices.max_by { |pair| pair[1].length }[0]
+  end
+
+  def customers_with_pending_invoices
+    invoices.select { |invoice| !invoice.paid? }.group_by { |invoice| invoice.customer }.keys
   end
 end

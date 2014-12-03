@@ -45,7 +45,7 @@ class ItemRepository < Repository
   def find_invoice_items(id)
     sales_engine.find_invoice_items_by_item(id)
   end
-  
+
   def find_merchant(merchant_id)
     sales_engine.find_merchant(merchant_id)
   end
@@ -53,9 +53,9 @@ class ItemRepository < Repository
     " #{self.class} #{@entities.size} "
   end
   def most_revenue(x)
-
+    all.sort { |a, b| b.revenue <=> a.revenue }.take(x)
   end
   def most_items(x)
-
+    all.sort { |a, b| b.quantity_sold <=> a.quantity_sold }.take(x)
   end
 end
