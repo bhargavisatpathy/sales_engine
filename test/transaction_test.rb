@@ -39,6 +39,5 @@ class TransactionTest < Minitest::Test
     parent.expect(:find_invoice, nil, [1])
     transaction.invoice
     parent.verify
-
   end
 end

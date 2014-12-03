@@ -33,20 +33,19 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal "success", transaction_repository.all[19].result
   end
 
-  def test_find_all_by_invoice_id
+  def test_it_finds_all_by_invoice_id
     assert_equal 3, transaction_repository.find_all_by_invoice_id(12).count
   end
 
-  def test_find_all_by_credit_card_number
+  def test_it_finds_all_by_credit_card_number
     assert_equal 1, transaction_repository.find_all_by_credit_card_number("4654405418249632").count
   end
 
-  #downcase issue with nil class
-  #  def test_find_all_by_credit_card_expiration_date
-  #   assert_equal 0, transaction_repository.find_all_by_credit_card_expiration_date("").count
-  # end
+  def test_it_finds_all_by_credit_card_expiration_date
+    assert_equal 24, transaction_repository.find_all_by_credit_card_expiration_date("").count
+  end
 
-  def test_find_all_by_result
+  def test_it_finds_all_by_result
     assert_equal 4, transaction_repository.find_all_by_result("failed").count
   end
 

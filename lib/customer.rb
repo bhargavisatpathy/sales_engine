@@ -16,6 +16,7 @@ class Customer
   end
   def transactions
     invoices.reduce([]) { |trans, invoice| trans << invoice.transactions }
+    #invoices.flat_map { |invoice| [invoice.transactions] }
   end
   def favorite_merchant
     merchant_invoices = invoices.select { |invoice| invoice.paid? }.group_by { |invoice| invoice.merchant }.to_a

@@ -28,7 +28,14 @@ class SalesEngine
     @transaction_repository   = TransactionRepository.new(self, "#{dir}/transactions.csv")
   end
   def startup
-    puts "starting up cap'n"
+    #puts "starting up cap'n"
+    sales_engine = SalesEngine.new
+    merchant_repository.load_file
+    invoice_repository.load_file
+    item_repository.load_file
+    invoice_item_repository.load_file
+    customer_repository.load_file
+    transaction_repository.load_file
   end
   def find_invoices_by_customer(id)
     invoice_repository.find_all_by_customer_id(id)
@@ -68,7 +75,6 @@ class SalesEngine
   def find_invoices_by_merchant(id)
     invoice_repository.find_all_by_merchant_id(id)
   end
-
   def create_invoice_item(input)
     invoice_item_repository.create(input)
   end

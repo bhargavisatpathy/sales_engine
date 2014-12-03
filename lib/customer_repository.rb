@@ -29,6 +29,10 @@ class CustomerRepository < Repository
   def find_invoices(id)
     sales_engine.find_invoices_by_customer(id)
   end
+
+  def most_items
+    all.max_by { |entity| entity.items_purchased }
+  end
   def inspect
     " #{self.class} #{@entities.size} "
   end
