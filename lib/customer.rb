@@ -18,11 +18,31 @@ class Customer
     invoices.reduce([]) { |trans, invoice| trans << invoice.transactions }
     #invoices.flat_map { |invoice| [invoice.transactions] }
   end
+
   def favorite_merchant
     merchant_invoices = invoices.select { |invoice| invoice.paid? }.group_by { |invoice| invoice.merchant }.to_a
     merchant_invoices.max_by { |pair| pair[1].length }[0]
   end
+
+  def items_purchased
+    @items_purchased ||= invoices.reduce(0) { |sum, invoice| sum + invoice.items_purchased }
+  end
+
+  def revenue
+    @revenue ||= calculate_revenue
+  end
+
+  def calculate_revenue
+    invoices.reduce(0) { |sum, invoice| sum + invoice.revenue }
+  end
+
+  def pending_invoices
+    invoices.select { |invoice| invoice.failed? }
+  end
+
   def clear_cache
+    @revenue = nil
+    @items_purchased = nil
     @invoices = nil
   end
 end

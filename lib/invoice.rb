@@ -29,6 +29,9 @@ class Invoice
   def paid?
     @paid ||= transactions.any? {|transaction| transaction.result == "success"}
   end
+  def failed?
+    transactions.all? {|transaction| transaction.result == "failed"}
+  end
   def revenue
       @revenue ||= calculate_revenue
   end
@@ -42,6 +45,9 @@ class Invoice
     @item_sold ||= calculate_items_sold
   end
 
+  def items_purchased
+    @items_purchased ||= calculate_items_sold
+  end
   def calculate_items_sold
     return 0 unless paid?
     invoice_items.reduce(0) { |sum, invoice_item| sum + invoice_item.quantity }

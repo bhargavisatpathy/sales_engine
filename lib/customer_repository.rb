@@ -31,7 +31,11 @@ class CustomerRepository < Repository
   end
 
   def most_items
-    all.max_by { |entity| entity.items_purchased }
+    all.max_by { |customer| customer.items_purchased }
+  end
+
+  def most_revenue
+    all.max_by { |customer| customer.revenue }
   end
   def inspect
     " #{self.class} #{@entities.size} "

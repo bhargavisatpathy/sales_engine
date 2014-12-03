@@ -24,21 +24,21 @@ class SalesEngineTest < Minitest::Test
     assert sales_engine.customer_repository
     assert sales_engine.transaction_repository
   end
-  # def test_it_delegates_startup_to_repository_load_files
-  #   sales_engine.merchant_repository.expect(:load_file, nil, [])
-  #   sales_engine.invoice_repository.expect(:load_file, nil, [])
-  #   sales_engine.item_repository.expect(:load_file, nil, [])
-  #   sales_engine.invoice_item_repository.expect(:load_file, nil, [])
-  #   sales_engine.customer_repository.expect(:load_file, nil, [])
-  #   sales_engine.transaction_repository.expect(:load_file, nil, [])
-  #   sales_engine.startup
-  #   sales_engine.merchant_repository.verify
-  #   sales_engine.invoice_repository.verify
-  #   sales_engine.item_repository.verify
-  #   sales_engine.invoice_item_repository.verify
-  #   sales_engine.customer_repository.verify
-  #   sales_engine.transaction_repository.verify
-#  end
+  def test_it_delegates_startup_to_repository_load_files
+    sales_engine.merchant_repository.expect(:load_file, nil, [])
+    sales_engine.invoice_repository.expect(:load_file, nil, [])
+    sales_engine.item_repository.expect(:load_file, nil, [])
+    sales_engine.invoice_item_repository.expect(:load_file, nil, [])
+    sales_engine.customer_repository.expect(:load_file, nil, [])
+    sales_engine.transaction_repository.expect(:load_file, nil, [])
+    sales_engine.startup
+    sales_engine.merchant_repository.verify
+    sales_engine.invoice_repository.verify
+    sales_engine.item_repository.verify
+    sales_engine.invoice_item_repository.verify
+    sales_engine.customer_repository.verify
+    sales_engine.transaction_repository.verify
+  end
   def test_it_delegates_find_invoices_by_customer_to_invoice_repository
     sales_engine.invoice_repository.expect(:find_all_by_customer_id, nil, [1])
     sales_engine.find_invoices_by_customer(1)
