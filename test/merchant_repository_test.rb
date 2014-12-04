@@ -7,10 +7,11 @@ require_relative '../lib/merchant_repository'
 
 
 class MerchantRepositoryTest < Minitest::Test
-  attr_reader :merchant_repository#, :sales_engine
+  attr_reader :merchant_repository, :sales_engine
   def setup
     @merchant_repository = MerchantRepository.new(nil, "./fixtures/merchants_testdata.csv")
-    merchant_repository.load_file
+    merchant_repository.load_file 
+    @sales_engine = SalesEngine.new
   end
   def test_load_test_datafile
     assert_equal 20, merchant_repository.all.length
@@ -38,5 +39,20 @@ class MerchantRepositoryTest < Minitest::Test
     parent.expect(:find_invoices_by_merchant, nil, [1])
     merchant_repository.find_invoices(1)
     parent.verify
+  end
+
+  def test_it_can_return_top_x_revenue
+  skip
+    most_rev = sales_engine.merchant_repository.most_revenue(1)
+
+    puts "testing top rev"
+    assert_equal "Dicki-Bednar", most_rev
+    
+    # parent = Minitest::Mock.new
+    # merchant = Minitest::Mock.new
+    # merchant_repository = MerchantRepository.new(parent, nil)
+    # merchant.expect(:revenue, nil, [1])
+    # merchant_repository.most_revenue(1)
+    # merchant.verify
   end
 end
