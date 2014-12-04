@@ -7,10 +7,11 @@ require_relative '../lib/merchant_repository'
 
 
 class MerchantRepositoryTest < Minitest::Test
-  attr_reader :merchant_repository#, :sales_engine
+  attr_reader :merchant_repository, :sales_engine
   def setup
     @merchant_repository = MerchantRepository.new(nil, "./fixtures/merchants_testdata.csv")
     merchant_repository.load_file
+    @sales_engine = SalesEngine.new
   end
   def test_load_test_datafile
     assert_equal 20, merchant_repository.all.length

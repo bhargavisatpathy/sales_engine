@@ -27,7 +27,7 @@ class MerchantRepository < Repository
   end
 
   def most_revenue(x)
-    all.sort { |a, b| b.revenue <=> a.revenue }.take(x)
+    all.sort { |a, b| b.revenue <=> a.revenue }.take(x)   
   end
 
   def most_items(x)

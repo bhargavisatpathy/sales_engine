@@ -15,7 +15,6 @@ class Customer
     @invoices ||= repository.find_invoices(id)
   end
   def transactions
-    #invoices.reduce([]) { |trans, invoice| trans << invoice.transactions }
     invoices.flat_map { |invoice| invoice.transactions }
   end
 
