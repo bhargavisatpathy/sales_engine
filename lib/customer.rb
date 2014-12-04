@@ -15,8 +15,8 @@ class Customer
     @invoices ||= repository.find_invoices(id)
   end
   def transactions
-    invoices.reduce([]) { |trans, invoice| trans << invoice.transactions }
-    #invoices.flat_map { |invoice| [invoice.transactions] }
+    #invoices.reduce([]) { |trans, invoice| trans << invoice.transactions }
+    invoices.flat_map { |invoice| invoice.transactions }
   end
 
   def favorite_merchant
@@ -37,7 +37,14 @@ class Customer
   end
 
   def pending_invoices
-    invoices.select { |invoice| invoice.failed? }
+    invoices.select { |invoice| !invoice.paid? }
+  end
+
+  def days_since_activity
+    latest_transaction_date = transactions.max_by { |trans| trans.created_at }.created_at
+    if latest_transaction_date
+      days = (Time.now.to_date - latest_transaction_date).to_i
+    end
   end
 
   def clear_cache

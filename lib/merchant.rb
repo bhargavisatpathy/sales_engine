@@ -18,19 +18,23 @@ class Merchant
     @invoices ||= repository.find_invoices(id)
   end
 
-  def revenue(date = nil)
-    if date.nil?
+  def revenue(criteria = nil)
+    if criteria.nil?
       @revenue ||= calculate_revenue
     else
-      calculate_revenue(date)
+      calculate_revenue(criteria)
     end
   end
 
-  def calculate_revenue(date = nil)
-    if date.nil?
+  def calculate_revenue(criteria = nil)
+    if criteria.nil?
       invoices.reduce(0) { |sum, invoice| sum + invoice.revenue }
     else
-      invoices.select { |invoice| invoice.updated_at == date }.reduce(0) { |sum, invoice| sum + invoice.revenue}
+      if criteria.class == Range
+        invoices.select { |invoice| criteria.include?(invoice.created_at) }.reduce(0) { |sum, invoice| sum + invoice.revenue}
+      else
+        invoices.select { |invoice| invoice.created_at == criteria }.reduce(0) { |sum, invoice| sum + invoice.revenue}
+      end
     end
   end
 

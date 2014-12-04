@@ -34,9 +34,24 @@ class MerchantRepository < Repository
     all.sort { |a, b| b.items_sold <=> a.items_sold }.take(x)
   end
 
-  def revenue(date)
-    return 0 if date.nil?
-    all.reduce(0) { |sum, merchant| sum + merchant.revenue(date) }
+  def revenue(criteria)
+    return 0 if criteria.nil?
+    all.reduce(0) { |sum, merchant| sum + merchant.revenue(criteria) }
+  end
+
+  def dates_by_revenue(x = nil)
+    @dates_by_revenue ||= calculate_dates_by_revenue
+    if x.nil?
+      @dates_by_revenue
+    else
+      @dates_by_revenue.take(x)
+    end
+  end
+
+  def calculate_dates_by_revenue
+      date_invoices = all.flat_map { |merchant| merchant.invoices }.group_by { |invoice| invoice.created_at }.to_a
+      date_revenue = date_invoices.map { |pair| [pair[0],pair[1].reduce(0) { |sum, invoice| sum + invoice.revenue }]}
+      date_revenue.sort { |a, b| b[1] <=> a[1] }.map { |row| row[0] }
   end
 
   def inspect

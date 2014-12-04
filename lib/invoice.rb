@@ -11,27 +11,31 @@ class Invoice
     @updated_at  = Date.parse(row[:updated_at])
     @repository  = repository
   end
+
   def transactions
     @transactions ||= repository.find_transactions(id)
   end
+
   def invoice_items
     @invoice_items ||= repository.find_invoice_items(id)
   end
+
   def items
     @item ||= repository.find_items(id)
   end
+
   def customer
     @customer ||= repository.find_customer(customer_id)
   end
+
   def merchant
     @merchant ||= repository.find_merchant(merchant_id)
   end
+
   def paid?
-    @paid ||= transactions.any? {|transaction| transaction.result == "success"}
+    transactions.any? {|transaction| transaction.result == "success"}
   end
-  def failed?
-    transactions.all? {|transaction| transaction.result == "failed"}
-  end
+
   def revenue
       @revenue ||= calculate_revenue
   end
@@ -48,6 +52,7 @@ class Invoice
   def items_purchased
     @items_purchased ||= calculate_items_sold
   end
+
   def calculate_items_sold
     return 0 unless paid?
     invoice_items.reduce(0) { |sum, invoice_item| sum + invoice_item.quantity }
@@ -60,5 +65,9 @@ class Invoice
 
   def clear_cache
     @transactions = nil
+    @invoice_items = nil
+    @customer = nil
+    @merchant = nil
+    @paid = nil
   end
 end

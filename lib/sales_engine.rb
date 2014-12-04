@@ -29,7 +29,6 @@ class SalesEngine
   end
   def startup
     #puts "starting up cap'n"
-    sales_engine = SalesEngine.new
     merchant_repository.load_file
     invoice_repository.load_file
     item_repository.load_file
