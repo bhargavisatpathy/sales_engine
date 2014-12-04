@@ -18,7 +18,7 @@ class MerchantRepository < Repository
     find_all_by_X(:name, name)
   end
 
-  def find_items(id) #this is the merchannt_id
+  def find_items(id)
     sales_engine.find_items_by_merchant(id)
   end
 
@@ -27,7 +27,7 @@ class MerchantRepository < Repository
   end
 
   def most_revenue(x)
-    all.sort { |a, b| b.revenue <=> a.revenue }.take(x)   
+    all.sort { |a, b| b.revenue <=> a.revenue }.take(x)
   end
 
   def most_items(x)
@@ -49,8 +49,10 @@ class MerchantRepository < Repository
   end
 
   def calculate_dates_by_revenue
-      date_invoices = all.flat_map { |merchant| merchant.invoices }.group_by { |invoice| invoice.created_at }.to_a
-      date_revenue = date_invoices.map { |pair| [pair[0],pair[1].reduce(0) { |sum, invoice| sum + invoice.revenue }]}
+      date_invoices = all.flat_map { |merchant| merchant.invoices }
+                         .group_by { |invoice| invoice.created_at }.to_a
+      date_revenue = date_invoices.map { |pair| [pair[0],pair[1]
+                          .reduce(0) { |sum, invoice| sum + invoice.revenue }]}
       date_revenue.sort { |a, b| b[1] <=> a[1] }.map { |row| row[0] }
   end
 

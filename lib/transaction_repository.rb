@@ -54,7 +54,8 @@ class TransactionRepository < Repository
     @entities << new_row
     new_row.invoice.customer.clear_cache
     new_row.invoice.merchant.clear_cache
-    new_row.invoice.invoice_items.each { |invoice_item| invoice_item.item.clear_cache}
+    new_row.invoice.invoice_items.each { |invoice_item| invoice_item.item
+                                                        .clear_cache}
     new_row.invoice.clear_cache
     new_row
   end

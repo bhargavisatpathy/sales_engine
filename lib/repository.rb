@@ -45,11 +45,13 @@ class Repository
   protected
 
   def find_by_X(attribute, criteria)
-    all.detect { |entity| entity.send(attribute).to_s.downcase == criteria.to_s.downcase }
+    all.detect { |entity| entity.send(attribute).to_s.downcase == criteria
+                                                .to_s.downcase }
   end
 
   def find_all_by_X(attribute, criteria)
-    all.select { |entity| entity.send(attribute).to_s.downcase == criteria.to_s.downcase }
+    all.select { |entity| entity.send(attribute).to_s.downcase == criteria
+                                                .to_s.downcase }
   end
   def inspect
     " #{self.class} #{@entities.size} "

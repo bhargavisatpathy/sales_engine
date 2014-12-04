@@ -1,7 +1,8 @@
 require 'date'
 class Transaction
-  attr_reader :id, :invoice_id, :credit_card_number, :credit_card_expiration_date,
-              :result, :created_at, :updated_at, :repository
+  attr_reader :id, :invoice_id, :credit_card_number,
+              :credit_card_expiration_date, :result,
+              :created_at, :updated_at, :repository
 
   def initialize(row, repository)
     @id                          = row[:id].to_i

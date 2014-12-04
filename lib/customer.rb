@@ -19,12 +19,14 @@ class Customer
   end
 
   def favorite_merchant
-    merchant_invoices = invoices.select { |invoice| invoice.paid? }.group_by { |invoice| invoice.merchant }.to_a
+    merchant_invoices = invoices.select { |invoice| invoice.paid? }
+                                .group_by { |invoice| invoice.merchant }.to_a
     merchant_invoices.max_by { |pair| pair[1].length }[0]
   end
 
   def items_purchased
-    @items_purchased ||= invoices.reduce(0) { |sum, invoice| sum + invoice.items_purchased }
+    @items_purchased ||= invoices
+                    .reduce(0) { |sum, invoice| sum + invoice.items_purchased }
   end
 
   def revenue
@@ -40,7 +42,8 @@ class Customer
   end
 
   def days_since_activity
-    latest_transaction_date = transactions.max_by { |trans| trans.created_at }.created_at
+    latest_transaction_date = transactions.max_by { |trans| trans.created_at }
+                                          .created_at
     if latest_transaction_date
       days = (Time.now.to_date - latest_transaction_date).to_i
     end

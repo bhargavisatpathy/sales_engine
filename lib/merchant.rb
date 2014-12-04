@@ -31,24 +31,28 @@ class Merchant
       invoices.reduce(0) { |sum, invoice| sum + invoice.revenue }
     else
       if criteria.class == Range
-        invoices.select { |invoice| criteria.include?(invoice.created_at) }.reduce(0) { |sum, invoice| sum + invoice.revenue}
+        invoices.select { |invoice| criteria.include?(invoice.created_at) }
+                .reduce(0) { |sum, invoice| sum + invoice.revenue}
       else
-        invoices.select { |invoice| invoice.created_at == criteria }.reduce(0) { |sum, invoice| sum + invoice.revenue}
+        invoices.select { |invoice| invoice.created_at == criteria }
+                .reduce(0) { |sum, invoice| sum + invoice.revenue}
       end
     end
   end
 
   def items_sold
-    @items_sold ||= invoices.reduce(0) { |sum, invoice| sum + invoice.items_sold }
+    @items_sold ||= invoices.reduce(0) { |sum, invoice| sum + invoice.items_sold}
   end
 
   def favorite_customer
-    customer_invoices = invoices.select { |invoice| invoice.paid? }.group_by { |invoice| invoice.customer }.to_a
+    customer_invoices = invoices.select { |invoice| invoice.paid? }
+                                .group_by { |invoice| invoice.customer }.to_a
     customer_invoices.max_by { |pair| pair[1].length }[0]
   end
 
   def customers_with_pending_invoices
-    invoices.select { |invoice| !invoice.paid? }.group_by { |invoice| invoice.customer }.keys
+    invoices.select { |invoice| !invoice.paid? }
+            .group_by { |invoice| invoice.customer }.keys
   end
 
   def clear_cache

@@ -56,12 +56,14 @@ class InvoiceRepository < Repository
 
   def create(input)
     invoice_id = next_id
-    new_row = Invoice.new({id: invoice_id, customer_id: input[:customer].id, merchant_id: input[:merchant].id,
-                status: input[:status], created_at: Time.now.to_s, updated_at: Time.now.to_s}, self)
+    new_row = Invoice.new({id: invoice_id, customer_id: input[:customer].id,
+      merchant_id: input[:merchant].id, status: input[:status],
+      created_at: Time.now.to_s, updated_at: Time.now.to_s}, self)
     @entities << new_row
     input[:items].group_by { |item| item.id }
       .each_value do |items|
-         sales_engine.create_invoice_item(invoice_id: invoice_id, quantity: items.length, item: items[0])
+         sales_engine.create_invoice_item(invoice_id: invoice_id,
+         quantity: items.length, item: items[0])
       end
     input[:customer].clear_cache
     input[:merchant].clear_cache

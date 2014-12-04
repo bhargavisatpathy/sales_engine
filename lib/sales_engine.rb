@@ -82,17 +82,3 @@ class SalesEngine
     transaction_repository.create(input)
   end
 end
-
-# engine = SalesEngine.new
-# engine.startup
-
-# engine.merchant_repository
-# engine.invoice_repository
-# engine.item_repository
-# engine.invoice_item_repository
-# engine.customer_repository
-# engine.transaction_repository
-#engine.invoice_repository.all.each { |invoice| puts invoice.revenue}
-#engine.merchant_repository.all.each { |merchant| puts merchant.revenue}
-# merchants = engine.merchant_repository.most_revenue(3).each { |merchant| puts merchant.name}
-# puts "found top merchants: #{merchants.map(&:name)}, with revenues #{merchants.map(&:revenue)}"

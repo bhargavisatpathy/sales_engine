@@ -1,6 +1,7 @@
 require 'date'
 class Invoice
-  attr_reader :id, :customer_id, :merchant_id, :status, :created_at, :updated_at, :repository
+  attr_reader :id, :customer_id, :merchant_id, :status, :created_at,
+              :updated_at, :repository
 
   def initialize(row, repository)
     @id          = row[:id].to_i
@@ -42,7 +43,7 @@ class Invoice
 
   def calculate_revenue
     return 0 unless paid?
-    invoice_items.reduce(0) { |sum, invoice_item| sum + invoice_item.total_price }
+    invoice_items.reduce(0) { |sum, invoice_item| sum + invoice_item.total_price}
   end
 
   def items_sold
